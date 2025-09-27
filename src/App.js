@@ -45,7 +45,15 @@ function App() {
   //     emailId: "",
   //   });
   // };
+  const [currentSlide, setCurrentSlide] = useState(0);
 
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % services.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + services.length) % services.length);
+  };
   const dropIn = {
     hidden: { y: -80, opacity: 0 },
     show: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 180 } },
@@ -379,9 +387,8 @@ function App() {
         </motion.div>
       </motion.section>
 
-      {/* About Section */}
       <motion.section
-        className="w-full flex flex-col items-center justify-center py-16 px-6 bg-gradient-to-b from-white to-[#fafafa]"
+        className="w-full flex flex-col items-center justify-center py-12 px-4 sm:py-16 sm:px-6 bg-gradient-to-b from-white to-[#fafafa]"
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
@@ -389,7 +396,7 @@ function App() {
       >
         {/* Badge */}
         <motion.span
-          className="px-4 py-1 rounded-full text-sm font-medium bg-orange-100 text-orange-600 mb-3"
+          className="px-3 py-1 text-sm sm:px-4 sm:py-1 rounded-full font-medium bg-orange-100 text-orange-600 mb-2 sm:mb-3"
           variants={fadeUpStagger}
         >
           Meet Intake
@@ -397,7 +404,7 @@ function App() {
 
         {/* Heading */}
         <motion.h2
-          className="text-[60px] font-medium text-gray-900 mb-8"
+          className="text-3xl sm:text-[60px] font-medium text-gray-900 mb-6 sm:mb-8 text-center"
           variants={fadeUpStagger}
         >
           About Us
@@ -405,11 +412,11 @@ function App() {
 
         {/* Black Box */}
         <motion.div
-          className="max-w-4xl bg-black text-white rounded-2xl shadow-lg p-8 text-center mb-8"
+          className="w-full max-w-md sm:max-w-4xl bg-black text-white rounded-2xl shadow-lg p-6 sm:p-8 text-center mb-6 sm:mb-8"
           variants={fadeUpStagger}
         >
           <motion.p
-            className="text-[22px] leading-relaxed"
+            className="text-base sm:text-[22px] leading-relaxed"
             variants={fadeUpStagger}
           >
             Food is more than a necessity—it’s an opportunity to connect,
@@ -425,11 +432,11 @@ function App() {
 
         {/* Gradient Box */}
         <motion.div
-          className="max-w-3xl text-center bg-gradient-to-r from-orange-100 via-pink-100 to-purple-100 rounded-xl p-6"
+          className="w-full max-w-md sm:max-w-3xl text-center bg-gradient-to-r from-orange-100 via-pink-100 to-purple-100 rounded-xl p-4 sm:p-6"
           variants={fadeUpStagger}
         >
           <motion.p
-            className="text-lg leading-relaxed text-gray-900"
+            className="text-sm sm:text-lg leading-relaxed text-gray-900"
             variants={fadeUpStagger}
           >
             From{" "}
@@ -446,10 +453,11 @@ function App() {
 
         {/* Gradient Line */}
         <motion.div
-          className="h-1 w-20 mt-8 rounded-full bg-gradient-to-r from-orange-500 to-purple-500"
+          className="h-1 w-16 sm:w-20 mt-4 sm:mt-8 rounded-full bg-gradient-to-r from-orange-500 to-purple-500"
           variants={fadeUpStagger}
         />
       </motion.section>
+
       <motion.section
         className="w-full flex flex-col items-center justify-center py-20 px-6 bg-[#FFFBF8]"
         initial="hidden"
@@ -550,21 +558,21 @@ function App() {
       ].map((service, idx) => (
         <motion.section
           key={idx}
-          className="w-full py-20 px-6 bg-[#FFFBF8]"
+          className="w-full md:py-20  py-12 md:px-6 px-6 bg-[#FFFBF8]"
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
         >
           <div
-            className={`max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 ${
-              service.reverse ? "md:flex-row-reverse" : ""
+            className={`max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 ${
+              service.reverse ? "md:flex-row-reverse flex-col" : ""
             }`}
           >
             <motion.div
               className="flex-1 flex justify-center"
               variants={service.reverse ? slideLeft : slideRight}
             >
-              <div className="rounded-2xl border-2 border-orange-500 overflow-hidden shadow-lg">
+              <div className="rounded-2xl border-2 border-orange-500 overflow-hidden shadow-lg h-80 md:h-72">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -574,22 +582,24 @@ function App() {
             </motion.div>
 
             <motion.div
-              className="flex-1"
+              className="flex-1 "
               variants={service.reverse ? slideRight : slideLeft}
             >
-              <div className="mb-4 w-14 h-14">
-                <img src={service.icon} alt="icon" />
+              <div className="flex md:flex-col flex-row gap-1 md:gap-0 align-center ">
+                <div className="mb-4 w-14 h-14">
+                  <img src={service.icon} alt="icon" />
+                </div>
+
+                <h2 className="text-3xl font-bold text-[#0d1421] mb-1">
+                  {service.title}
+                </h2>
               </div>
 
-              <h2 className="text-3xl font-bold text-[#0d1421] mb-2">
-                {service.title}
-              </h2>
-
-              <p className="text-orange-600 italic font-medium mb-4">
+              <p className="text-orange-600 italic font-medium mb-4 text-center md:text-left">
                 {service.sub}
               </p>
 
-              <p className="text-lg text-gray-700 leading-relaxed">
+              <p className="md:text-lg text-medium text-gray-700 leading-relaxed text-center md:text-left">
                 {service.desc}
               </p>
             </motion.div>
@@ -615,7 +625,7 @@ function App() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+              className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6"
             >
               Bites and Moments
             </motion.h2>
@@ -625,7 +635,7 @@ function App() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg text-gray-600 max-w-4xl mx-auto leading-relaxed px-4"
             >
               We believe every moment at work deserves the right bite. From
               quick grab-and-go snacks for meetings to interactive counters that
@@ -635,50 +645,159 @@ function App() {
             </motion.p>
           </div>
 
-          {/* Services Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.id}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.2,
-                  ease: "easeOut",
-                }}
-                viewport={{ once: true }}
-                className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group"
+          {/* Mobile Carousel (< md) */}
+          <div className="block md:hidden">
+            <div className="relative overflow-hidden">
+              <div
+                className="flex transition-transform duration-300 ease-in-out"
+                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
-                {/* Image Container */}
-                <div className="relative h-48 overflow-hidden">
-                  <div
-                    className={`w-full h-full ${service.bgColor} flex items-center justify-center relative`}
-                  >
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
+                {services.map((service, index) => (
+                  <div key={service.id} className="w-full flex-shrink-0 px-4">
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{
+                        duration: 0.6,
+                        ease: "easeOut",
+                      }}
+                      viewport={{ once: true }}
+                      className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden mx-auto max-w-sm"
+                    >
+                      {/* Image Container */}
+                      <div className="relative h-48 overflow-hidden">
+                        <div
+                          className={`w-full h-full ${service.bgColor} flex items-center justify-center relative`}
+                        >
+                          <img
+                            src={service.image}
+                            alt={service.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      </div>
 
-                <div className="p-5 space-y-2">
-                  <h3 className={`text-2xl font-bold ${service.titleColor}`}>
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-500 text-[14px] line-clamp-2">
-                    {service.description}
-                  </p>
+                      <div className="p-5 space-y-2">
+                        <h3
+                          className={`text-xl font-bold ${service.titleColor}`}
+                        >
+                          {service.title}
+                        </h3>
+                        <p className="text-gray-500 text-sm line-clamp-2">
+                          {service.description}
+                        </p>
 
-                  <div className="text-right">
-                    <span className="text-2xl font-light text-gray-400">
-                      {service.id}
-                    </span>
+                        <div className="text-right">
+                          <span className="text-xl font-light text-gray-400">
+                            {service.id}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                ))}
+              </div>
+
+              {/* Navigation Arrows */}
+              <button
+                onClick={prevSlide}
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg border border-gray-200 hover:bg-gray-50 transition-colors z-10"
+              >
+                <svg
+                  className="w-5 h-5 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+
+              <button
+                onClick={nextSlide}
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg border border-gray-200 hover:bg-gray-50 transition-colors z-10"
+              >
+                <svg
+                  className="w-5 h-5 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Dots Indicator */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {services.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    index === currentSlide ? "bg-orange-500" : "bg-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop Grid (>= md) - UNCHANGED */}
+          <div className="hidden md:block">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {services.map((service, index) => (
+                <motion.div
+                  key={service.id}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.2,
+                    ease: "easeOut",
+                  }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group"
+                >
+                  {/* Image Container */}
+                  <div className="relative h-48 overflow-hidden">
+                    <div
+                      className={`w-full h-full ${service.bgColor} flex items-center justify-center relative`}
+                    >
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="p-5 space-y-2">
+                    <h3 className={`text-2xl font-bold ${service.titleColor}`}>
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-500 text-[14px] line-clamp-2">
+                      {service.description}
+                    </p>
+
+                    <div className="text-right">
+                      <span className="text-2xl font-light text-gray-400">
+                        {service.id}
+                      </span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -702,7 +821,7 @@ function App() {
 
         {/* Process Cards */}
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
               {
                 num: "01",
@@ -743,21 +862,19 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.2 }}
                 viewport={{ once: true }}
-                className={`relative bg-white border-2 ${card.border} rounded-3xl p-8 hover:shadow-lg transition-shadow duration-300`}
+                className={`relative bg-white border-2 ${card.border} rounded-3xl p-4 sm:p-6 lg:p-8 hover:shadow-lg transition-shadow duration-300`}
               >
                 {/* Number */}
-                <div className="text-gray-300 text-4xl font-light mb-6">
+                {/* Number */}
+                <div className="text-gray-300 text-2xl sm:text-3xl lg:text-4xl font-light mb-4 sm:mb-6">
                   {card.num}
                 </div>
 
-                {/* Icon */}
-                <img src={card.img} alt={card.title} />
-
                 {/* Content */}
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-medium sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2 sm:mb-4">
                   {card.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed mb-8">
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-6 sm:mb-8">
                   {card.desc}
                 </p>
 
