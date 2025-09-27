@@ -93,47 +93,12 @@ const Footer = () => {
           {/* Services */}
           <div className="lg:col-span-1">
             <h3 className="text-white text-lg font-semibold mb-6">Services</h3>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-orange-500 transition-colors"
-                >
-                  Corporate Orders
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-orange-500 transition-colors"
-                >
-                  Tea & Coffee Solutions
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-orange-500 transition-colors"
-                >
-                  Corporate Meals
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-orange-500 transition-colors"
-                >
-                  Vending Solutions
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-300 hover:text-orange-500 transition-colors"
-                >
-                  Gift Kits
-                </a>
-              </li>
+            <ul className="space-y-3 text-gray-300">
+              <li>Corporate Snacks</li>
+              <li>Tea & Coffee Solutions</li>
+              <li>Corporate Meals</li>
+              <li>Vending Solutions</li>
+              <li>Corporate Gift Kits</li>
             </ul>
           </div>
 

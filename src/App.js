@@ -321,6 +321,7 @@ function App() {
 
           <motion.button
             className="mt-6 px-6 py-3 text-white rounded-lg shadow-lg hover:scale-105 transition"
+            onClick={() => handleOpenModal("contact")}
             style={{
               backgroundImage:
                 "linear-gradient(135deg, #F54900 27.4%, #F54900 60.58%, #F0B100 100%)",
