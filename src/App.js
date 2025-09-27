@@ -190,16 +190,10 @@ function App() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <img
-              src="/intake_logo.png"
-              alt="Intake Logo"
-              className="h-10 w-auto"
-            />
+            <img src="/logo12.png" alt="Intake Logo" className="h-10 w-auto" />
           </div>
 
-          {/* Action Buttons */}
           <div className="flex items-center space-x-4">
-            {/* Contact Us Button */}
             <button
               onClick={() => handleOpenModal("contact")}
               className="px-6 py-2 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-gray-900 transition-colors duration-200"
@@ -207,10 +201,9 @@ function App() {
               Contact Us
             </button>
 
-            {/* Partner with Us Button */}
             <button
               onClick={() => handleOpenModal("partner")}
-              className="px-6 py-2 bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600 transition-colors duration-200"
+              className="px-6 py-2 bg-[#F54900] text-white font-medium rounded-lg hover:bg-orange-600 transition-colors duration-200"
             >
               Partner with Us
             </button>
@@ -619,7 +612,6 @@ function App() {
       </section>
       <section className="py-16 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
           <div className="text-center mb-12">
             <div className="inline-block bg-orange-100 text-orange-500 px-6 py-2 rounded-full text-sm font-medium mb-4">
               Every Bite, a Moment
@@ -660,17 +652,15 @@ function App() {
                   </div>
                 </div>
 
-                {/* Content */}
                 <div className="p-5 space-y-2">
                   <h3 className={`text-2xl font-bold ${service.titleColor}`}>
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-500 text-[14px] line-clamp-2">
                     {service.description}
                   </p>
 
-                  {/* Number indicator */}
-                  <div className="pt-2 text-right">
+                  <div className="text-right">
                     <span className="text-2xl font-light text-gray-400">
                       {service.id}
                     </span>

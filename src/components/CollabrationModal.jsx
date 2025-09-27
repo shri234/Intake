@@ -311,12 +311,12 @@ const PartnerWithUsForm = ({ onClose }) => {
             className="hidden"
           />
           {/* Upload link: Clicks the hidden input */}
-          <span
+          {/* <span
             onClick={triggerFileUpload}
             className="text-orange-600 font-semibold cursor-pointer flex items-center hover:text-orange-700 transition"
           >
             <span className="mr-1">⬆️</span> Upload pdf/jpeg
-          </span>
+          </span> */}
         </label>
         <input
           type="text"
