@@ -150,7 +150,7 @@ const ContactUsForm = ({ onClose, onSuccess }) => {
               onChange={handleChange}
               placeholder="Enter contact number here..."
               required
-              className="flex-grow p-3 border border-gray-300 rounded-r-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition outline-none"
+              className="flex-grow p-2 md:p-3 lg:p-3 w-[90px] md:w-[100px] lg:w-[100px] border border-gray-300 rounded-r-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition outline-none"
               style={{
                 borderColor: "#FF6900",
                 boxShadow: "0 0 0 1px #FF6900 inset",
@@ -323,7 +323,7 @@ const PartnerWithUsForm = ({ onClose, onSuccess }) => {
               onChange={handleChange}
               placeholder="Enter contact number here..."
               required
-              className="flex-grow p-2 md:p-3 lg:p-3 border border-gray-300 rounded-r-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition outline-none"
+              className="flex-grow p-2 md:p-3 lg:p-3 w-[90px] md:w-[100px] lg:w-[100px] border border-gray-300 rounded-r-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition outline-none"
               style={{
                 borderColor: "#FF6900",
                 boxShadow: "0 0 0 1px #FF6900 inset",
