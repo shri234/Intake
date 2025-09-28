@@ -2,22 +2,22 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-12 lg:py-16">
+    <footer className="bg-black text-white py-8 md:py-14 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 lg:px-8">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-12">
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="flex items-center">
               <img
                 src="/logo12.png"
                 alt="Intake Logo"
-                className="h-10 w-auto mb-9"
+                className="h-10 w-auto mb-4 md:mb-9 lg:mb-9"
               />
             </div>
 
             {/* Company Description */}
-            <p className="text-gray-400 leading-relaxed mb-6">
+            <p className="text-gray-400 leading-relaxed mb-3 md:mb-6 lg:mb-6">
               Elevating workdays, one bite at a time. Professional corporate
               food solutions that bring teams together.
             </p>
@@ -92,7 +92,9 @@ const Footer = () => {
 
           {/* Services */}
           <div className="lg:col-span-1">
-            <h3 className="text-white text-lg font-semibold mb-6">Services</h3>
+            <h3 className="text-white text-lg font-semibold mb-4 md:mb-6 lg:mb-6">
+              Services
+            </h3>
             <ul className="space-y-3 text-gray-300">
               <li>Corporate Snacks</li>
               <li>Tea & Coffee Solutions</li>
@@ -103,8 +105,10 @@ const Footer = () => {
           </div>
 
           {/* Follow Us */}
-          <div className="lg:col-span-1">
-            <h3 className="text-white text-lg font-semibold mb-6">Follow Us</h3>
+          <div className="lg:col-span-1 mb-0">
+            <h3 className="text-white text-lg font-semibold mb-6 ">
+              Follow Us
+            </h3>
             <div className="flex space-x-4">
               {/* LinkedIn */}
               <a

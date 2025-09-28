@@ -216,7 +216,7 @@ function App() {
       ),
     },
   ];
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [initialTab, setInitialTab] = useState("contact"); // State to track which tab to open
 
@@ -229,14 +229,17 @@ function App() {
 
   return (
     <div>
-      <header className="w-full bg-[#000000] px-6 py-4">
+      <header className="w-full bg-[#000000] px-6 py-4 relative z-20">
+        {" "}
+        {/* Add relative and z-20 for menu context */}
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
+            {/* Note: In your image, the background is NOT black. I'm keeping bg-[#000000] as requested, but the logo color may need adjustment to be visible. The logo in the image is colored/white with a transparent background. */}
             <img src="/logo12.png" alt="Intake Logo" className="h-10 w-auto" />
           </div>
 
-          {/* Desktop Buttons */}
+          {/* Desktop Buttons (UNCHANGED) */}
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={() => handleOpenModal("contact")}
@@ -253,56 +256,105 @@ function App() {
             </button>
           </div>
 
-          {/* Mobile Hamburger */}
+          {/* Mobile Icon (Hamburger/Close) */}
           <div className="flex md:hidden">
             <button
-              // onClick={() => setIsMenuOpen(!isMenuOpen)}
+              // 2. Add onClick handler to toggle state
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-white focus:outline-none"
             >
-              {/* Simple Hamburger Icon */}
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
+              {/* 4. Display Close (X) icon when menu is open, otherwise display Hamburger */}
+              {isMenuOpen ? (
+                // Close Icon (X) - Matches the image, but the color is white for a black header
+                <svg
+                  className="w-6 h-6 text-[#F54900]" // Changed to the orange color for visibility against the dark background, or use white as per the header's text-white style
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              ) : (
+                // Hamburger Icon
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              )}
             </button>
           </div>
         </div>
       </header>
 
+      {/* 3. Mobile Menu Container */}
+      <div
+        className={`${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        } fixed top-0 right-0 h-auto w-auto max-w-sm bg-gray-100 shadow-xl transition-transform duration-300 ease-in-out z-10 md:hidden`}
+        style={{ paddingTop: "72px" }}
+      >
+        <div className="flex flex-col p-3 space-y-4">
+          <button
+            onClick={() => {
+              handleOpenModal("contact");
+              setIsMenuOpen(false);
+            }}
+            className="w-[180px] py-3 border border-gray-300 bg-white text-gray-800 font-semibold rounded-xl shadow-md"
+          >
+            Contact Us
+          </button>
+
+          <button
+            onClick={() => {
+              handleOpenModal("partner");
+              setIsMenuOpen(false);
+            }}
+            className="w-[180px] py-3 border border-gray-300 bg-white text-gray-800 font-semibold rounded-xl shadow-md"
+          >
+            Partner With Us
+          </button>
+        </div>
+      </div>
+
       <CollaborationModal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        defaultTab={initialTab} // Pass the state to set the initial view
+        defaultTab={initialTab}
       />
       <motion.section
-        className="max-w-7xl mx-auto px-6 py-12 mt-20 mb-24 grid md:grid-cols-2 gap-8 items-center"
+        className="max-w-md sm:max-w-xl md:max-w-4xl lg:max-w-7xl mx-auto px-3 md:px-6 py-6 md:py-12 mt-18 md:mt-20 mb-10 md:mb-24 lg:mb-24 grid md:grid-cols-2 gap-8 items-center"
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.3 }}
       >
-        {/* Left content */}
         <motion.div variants={fadeUp}>
           <motion.h1
-            className="text-[60px] font-bold"
+            className="text-[30px] md:text-[60px] font-bold"
             style={{ lineHeight: 1.1 }}
             variants={fadeUp}
           >
-            Elevating Workdays,{" "}
+            Elevating Workdays, <br></br>
             <span className="text-[#F54900]">One Bite at a Time.</span>
           </motion.h1>
 
           <motion.p
-            className="mt-4 text-[20px] text-gray-600"
+            className="mt-4 text-[14px] md:text-[20px]  text-gray-600"
             variants={fadeUp}
           >
             At Intake,{" "}
@@ -342,18 +394,17 @@ function App() {
 
         {/* Right content */}
         <motion.div
-          className="relative flex justify-center items-center h-[300px] md:h-[400px]"
+          className="relative flex justify-center items-center h-[340px] md:h-[400px] mt-4"
           variants={fadeUp}
         >
-          {/* Yellow Blob Background */}
           <motion.div
-            className="absolute inset-0 flex justify-center items-center"
+            className="absolute inset-0 flex justify-center items-center "
             variants={dropIn}
           >
             <img
               src="/YellowBlobBackground.png"
               alt="Decorative blob background"
-              className="w-[550px] h-[550px] object-contain"
+              className="w-[380px] h-[400px] md:h-[550px] md:w-[550px] lg:h-[550px] lg:w-[550px] object-contain"
               style={{ transform: "rotate(-5deg)" }}
             />
           </motion.div>
@@ -362,20 +413,19 @@ function App() {
           <motion.img
             src="/Line_Ornament.png"
             alt="Decorative Line Ornament"
-            className="absolute w-10 h-10 -top-11 right-3 transform rotate-[14deg]"
+            className="absolute w-7 h-7 md:w-10 md:h-10 lg:w-10 lg:h-10 -top-11 right-3 md:right-3 md:left-auto lg:right-3 lg:left-auto transform -rotate-[60deg] md:transform-gpu md:rotate-[14deg] lg:rotate-[14deg]"
             variants={fadeUp}
           />
 
           <motion.img
             src="/Line_Ornament1.png"
             alt="Decorative Line Ornament"
-            className="absolute w-10 h-10 -bottom-11 left-6 transform -rotate-[14deg]"
+            className="absolute w-7 h-7 md:w-10 md:h-10 lg:w-10 lg:h-10 -bottom-11 left-6 transform -rotate-[14deg]"
             variants={fadeUp}
           />
 
-          {/* Foreground image */}
           <motion.div
-            className="relative w-[480px] h-[370px] rounded-2xl overflow-hidden shadow-2xl z-10"
+            className="relative w-[360px] h-[300px] md:h-[370px] md:w-[480px] lg:h-[370px] lg:w-[480px] rounded-2xl overflow-hidden shadow-2xl z-10"
             variants={dropIn}
           >
             <img
@@ -459,7 +509,7 @@ function App() {
       </motion.section>
 
       <motion.section
-        className="w-full flex flex-col items-center justify-center py-20 px-6 bg-[#FFFBF8]"
+        className="w-full flex flex-col items-center justify-center py-12 md:py-20 lg:py-20 px-6 bg-[#FFFBF8]"
         initial="hidden"
         animate="show"
         variants={fadeUp}
@@ -472,7 +522,7 @@ function App() {
         </motion.span>
 
         <motion.h2
-          className="max-w-5xl text-center text-[60px] font-medium text-[#101828] mb-6"
+          className="max-w-5xl text-center text-[30px] md:text-[60px] lg:text-[60px] font-medium text-[#101828] mb-4 md:mb-6 lg:mb-6"
           style={{ lineHeight: 1.1 }}
           variants={dropIn}
         >
@@ -870,7 +920,6 @@ function App() {
                   {card.num}
                 </div>
 
-                {/* Content */}
                 <h3 className="text-medium sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2 sm:mb-4">
                   {card.title}
                 </h3>
@@ -878,7 +927,6 @@ function App() {
                   {card.desc}
                 </p>
 
-                {/* Bottom gradient line */}
                 <div
                   className={`absolute bottom-8 left-6 right-6 h-1 bg-gradient-to-r ${card.gradient} rounded-full`}
                 ></div>

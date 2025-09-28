@@ -1,25 +1,64 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
 
-// --- Form Data for Contact Us ---
-const ContactUsForm = ({ onClose }) => {
+const SuccessModal = ({ message, onClose }) => (
+  <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div className="bg-white rounded-xl shadow-2xl w-full max-w-sm p-6 relative text-center border-2 border-green-300">
+      <h3 className="text-xl font-semibold text-green-600 mb-4">
+        ✅ Thank You!
+      </h3>
+      <p className="text-gray-700">{message}</p>
+      <button
+        onClick={onClose}
+        className="mt-6 px-6 py-2 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+);
+
+const ContactUsForm = ({ onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
     companyName: "",
     employeeSize: "",
     contactNumber: "",
     emailId: "",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Contact Us Form Data Submitted:", formData);
-    // Add your API call or submission logic here
-    onClose(); // Close the modal on successful submission
+    setLoading(true);
+    try {
+      const res = await fetch(
+        "https://intake-backend-kvfp.onrender.com/send-email",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "contact",
+            formData,
+          }),
+        }
+      );
+
+      if (res.ok) {
+        onSuccess("Thanks for contacting us! We will reach you shortly.");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      alert("Error connecting to server.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -136,7 +175,6 @@ const ContactUsForm = ({ onClose }) => {
         </div>
       </div>
 
-      {/* Action Buttons */}
       <div className="flex justify-end space-x-4 mt-10">
         <button
           type="button"
@@ -148,17 +186,17 @@ const ContactUsForm = ({ onClose }) => {
         </button>
         <button
           type="submit"
-          className="px-6 py-2 bg-gradient-to-r from-[#FF6900] to-[#F54900] text-white font-medium rounded-lg shadow-md hover:shadow-lg transition"
+          disabled={loading}
+          className="px-6 py-2 bg-gradient-to-r from-[#FF6900] to-[#F54900] text-white font-medium rounded-lg shadow-md hover:shadow-lg transition disabled:opacity-60"
         >
-          Submit
+          {loading ? "Submitting..." : "Submit"}
         </button>
       </div>
     </form>
   );
 };
 
-// --- Form Data for Partner With Us (Vendor) ---
-const PartnerWithUsForm = ({ onClose }) => {
+const PartnerWithUsForm = ({ onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
     shopName: "",
     contactNumber: "",
@@ -166,6 +204,7 @@ const PartnerWithUsForm = ({ onClose }) => {
     foodVariety: "",
   });
   const [uploadedFile, setUploadedFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -173,33 +212,41 @@ const PartnerWithUsForm = ({ onClose }) => {
   };
 
   const handleFileChange = (e) => {
-    // This handles the actual file selected
     const file = e.target.files[0];
     setUploadedFile(file);
-
-    // Update the visual input field text
     setFormData((prev) => ({
       ...prev,
       foodVariety: file ? `File selected: ${file.name}` : "",
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Partner Form Data Submitted:", {
-      formData,
-      file: uploadedFile,
-    });
-    // Add your API call to send formData AND uploadedFile here
-    onClose(); // Close the modal on successful submission
-  };
+    setLoading(true);
+    try {
+      const res = await fetch(
+        "https://intake-backend-kvfp.onrender.com/send-email",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            type: "partner",
+            formData,
+          }),
+        }
+      );
 
-  // Ref for the hidden file input
-  const fileInputRef = React.useRef(null);
-
-  // Function to simulate clicking the hidden file input
-  const triggerFileUpload = () => {
-    fileInputRef.current.click();
+      if (res.ok) {
+        onSuccess("Thanks for partnering with us! We’ll connect soon.");
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting partner form:", error);
+      alert("Error connecting to server.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -207,7 +254,6 @@ const PartnerWithUsForm = ({ onClose }) => {
       <h3 className="text-xl font-semibold text-orange-600 mb-6">
         Vendor Collaboration
       </h3>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Shop Name */}
         <div className="flex flex-col space-y-2">
@@ -305,7 +351,7 @@ const PartnerWithUsForm = ({ onClose }) => {
           {/* Hidden file input */}
           <input
             type="file"
-            ref={fileInputRef}
+            // ref={fileInputRef}
             onChange={handleFileChange}
             accept=".pdf,.jpeg,.jpg,.png" // Limit file types
             className="hidden"
@@ -332,7 +378,6 @@ const PartnerWithUsForm = ({ onClose }) => {
         />
       </div>
 
-      {/* Action Buttons */}
       <div className="flex justify-end space-x-4 mt-10">
         <button
           type="button"
@@ -344,67 +389,84 @@ const PartnerWithUsForm = ({ onClose }) => {
         </button>
         <button
           type="submit"
-          className="px-6 py-2 bg-gradient-to-r from-[#FF6900] to-[#F54900] text-white font-medium rounded-lg shadow-md hover:shadow-lg transition"
+          disabled={loading}
+          className="px-6 py-2 bg-gradient-to-r from-[#FF6900] to-[#F54900] text-white font-medium rounded-lg shadow-md hover:shadow-lg transition disabled:opacity-60"
         >
-          Submit
+          {loading ? "Submitting..." : "Submit"}
         </button>
       </div>
     </form>
   );
 };
 
-// --- Main Modal Component (Remains unchanged) ---
 const CollaborationModal = ({ isOpen, onClose, defaultTab = "contact" }) => {
   const [activeTab, setActiveTab] = useState(defaultTab);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl p-6 relative border-2 border-orange-200">
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition-colors"
-          aria-label="Close modal"
-        >
-          <X className="w-6 h-6" />
-        </button>
+    <>
+      <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-xl shadow-2xl w-full max-w-2xl p-6 relative border-2 border-orange-200">
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-gray-500 hover:text-gray-900 transition-colors"
+            aria-label="Close modal"
+          >
+            <X className="w-6 h-6" />
+          </button>
 
-        {/* Tab/Header Section */}
-        <div className="flex justify-start text-lg font-medium mb-6 border-b border-gray-200">
-          <button
-            onClick={() => setActiveTab("contact")}
-            className={`px-4 py-2 relative transition-colors ${
-              activeTab === "contact" ? "text-orange-600" : "text-gray-500"
-            }`}
-          >
-            Contact Us
-            {activeTab === "contact" && (
-              <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-orange-500 to-purple-500"></div>
-            )}
-          </button>
-          <button
-            onClick={() => setActiveTab("partner")}
-            className={`px-4 py-2 relative transition-colors ${
-              activeTab === "partner" ? "text-orange-600" : "text-gray-500"
-            }`}
-          >
-            Partner With Us
-            {activeTab === "partner" && (
-              <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-orange-500 to-purple-500"></div>
-            )}
-          </button>
+          {/* Tab/Header Section */}
+          <div className="flex justify-start text-lg font-medium mb-6 border-b border-gray-200">
+            <button
+              onClick={() => setActiveTab("contact")}
+              className={`px-4 py-2 relative transition-colors ${
+                activeTab === "contact" ? "text-orange-600" : "text-gray-500"
+              }`}
+            >
+              Contact Us
+              {activeTab === "contact" && (
+                <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-orange-500 to-purple-500"></div>
+              )}
+            </button>
+            <button
+              onClick={() => setActiveTab("partner")}
+              className={`px-4 py-2 relative transition-colors ${
+                activeTab === "partner" ? "text-orange-600" : "text-gray-500"
+              }`}
+            >
+              Partner With Us
+              {activeTab === "partner" && (
+                <div className="absolute bottom-0 left-0 w-full h-[3px] bg-gradient-to-r from-orange-500 to-purple-500"></div>
+              )}
+            </button>
+          </div>
+
+          {/* Form Content */}
+          {activeTab === "contact" ? (
+            <ContactUsForm onClose={onClose} onSuccess={setSuccessMessage} />
+          ) : (
+            <PartnerWithUsForm
+              onClose={onClose}
+              onSuccess={setSuccessMessage}
+            />
+          )}
         </div>
-
-        {/* Form Content */}
-        {activeTab === "contact" ? (
-          <ContactUsForm onClose={onClose} />
-        ) : (
-          <PartnerWithUsForm onClose={onClose} />
-        )}
       </div>
-    </div>
+
+      {/* ✅ Success Modal */}
+      {successMessage && (
+        <SuccessModal
+          message={successMessage}
+          onClose={() => {
+            setSuccessMessage(null);
+            onClose();
+          }}
+        />
+      )}
+    </>
   );
 };
 
