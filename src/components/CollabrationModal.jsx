@@ -37,7 +37,7 @@ const ContactUsForm = ({ onClose, onSuccess }) => {
     setLoading(true);
     try {
       const res = await fetch(
-        "https://intake-backend-kvfp.onrender.com/send-email",
+        "https://intake-backend-production.up.railway.app/send-email",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -74,7 +74,10 @@ const ContactUsForm = ({ onClose, onSuccess }) => {
             htmlFor="companyName"
             className="text-gray-700 flex items-center font-medium"
           >
-            <span className="mr-2 text-xl">🏢</span> Company Name
+            <span className="mr-2 text-xl">
+              <img src="/Component 1.png"></img>
+            </span>{" "}
+            Company Name
           </label>
           <input
             type="text"
@@ -97,7 +100,10 @@ const ContactUsForm = ({ onClose, onSuccess }) => {
             htmlFor="employeeSize"
             className="text-gray-700 flex items-center font-medium"
           >
-            <span className="mr-2 text-xl">👥</span> Employee Size
+            <span className="mr-2 text-xl">
+              <img src="/Component_2.png"></img>
+            </span>{" "}
+            Employee Size
           </label>
           <input
             type="text"
@@ -120,7 +126,10 @@ const ContactUsForm = ({ onClose, onSuccess }) => {
             htmlFor="contactNumber"
             className="text-gray-700 flex items-center font-medium"
           >
-            <span className="mr-2 text-xl">📞</span> Contact Number
+            <span className="mr-2 text-xl">
+              <img src="/phone.png"></img>
+            </span>{" "}
+            Contact Number
           </label>
           <div className="flex">
             <select
@@ -157,7 +166,10 @@ const ContactUsForm = ({ onClose, onSuccess }) => {
             htmlFor="emailId"
             className="text-gray-700 flex items-center font-medium"
           >
-            <span className="mr-2 text-xl">✉️</span> Email ID
+            <span className="mr-2 text-xl">
+              <img src="/email.png"></img>
+            </span>{" "}
+            Email ID
           </label>
           <input
             type="email"
@@ -225,7 +237,7 @@ const PartnerWithUsForm = ({ onClose, onSuccess }) => {
     setLoading(true);
     try {
       const res = await fetch(
-        "https://intake-backend-kvfp.onrender.com/send-email",
+        "https://intake-backend-production.up.railway.app/send-email",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -261,7 +273,10 @@ const PartnerWithUsForm = ({ onClose, onSuccess }) => {
             htmlFor="shopName"
             className="text-gray-700 flex items-center font-medium"
           >
-            <span className="mr-2 text-xl">🛍️</span> Shop Name
+            <span className="mr-2 text-xl">
+              <img src="/shop.png"></img>
+            </span>{" "}
+            Shop Name
           </label>
           <input
             type="text"
@@ -284,7 +299,10 @@ const PartnerWithUsForm = ({ onClose, onSuccess }) => {
             htmlFor="contactNumber"
             className="text-gray-700 flex items-center font-medium"
           >
-            <span className="mr-2 text-xl">📞</span> Contact Number
+            <span className="mr-2 text-xl">
+              <img src="/phone.png"></img>
+            </span>{" "}
+            Contact Number
           </label>
           <div className="flex">
             <select
@@ -305,7 +323,7 @@ const PartnerWithUsForm = ({ onClose, onSuccess }) => {
               onChange={handleChange}
               placeholder="Enter contact number here..."
               required
-              className="flex-grow p-3 border border-gray-300 rounded-r-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition outline-none"
+              className="flex-grow p-2 md:p-3 lg:p-3 border border-gray-300 rounded-r-lg focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition outline-none"
               style={{
                 borderColor: "#FF6900",
                 boxShadow: "0 0 0 1px #FF6900 inset",
@@ -322,7 +340,10 @@ const PartnerWithUsForm = ({ onClose, onSuccess }) => {
           htmlFor="shopAddress"
           className="text-gray-700 flex items-center font-medium"
         >
-          <span className="mr-2 text-xl">📍</span> Shop Address
+          <span className="mr-2 text-xl">
+            <img src="/shop_address.png"></img>
+          </span>{" "}
+          Shop Address
         </label>
         <input
           type="text"
@@ -346,7 +367,10 @@ const PartnerWithUsForm = ({ onClose, onSuccess }) => {
           className="text-gray-700 flex items-center font-medium justify-between"
         >
           <div className="flex items-center">
-            <span className="mr-2 text-xl">🍴</span> Food Variety
+            <span className="mr-2 text-xl">
+              <img src="/food.png"></img>
+            </span>{" "}
+            Food Variety
           </div>
           {/* Hidden file input */}
           <input

@@ -636,11 +636,11 @@ function App() {
               variants={service.reverse ? slideRight : slideLeft}
             >
               <div className="flex md:flex-col flex-row gap-1 md:gap-0 align-center ">
-                <div className="mb-4 w-14 h-14">
+                <div className="md:mb-4 lg:mb-4 mb-1 w-14 h-14 ml-8 md:ml-0 lg:ml-0">
                   <img src={service.icon} alt="icon" />
                 </div>
 
-                <h2 className="text-3xl font-bold text-[#0d1421] mb-1">
+                <h2 className="text-[22px] md:text-[35px] lg:text-[35px] font-bold text-[#0d1421] md:text-left lg:text-left text-left mb-1">
                   {service.title}
                 </h2>
               </div>
@@ -703,7 +703,10 @@ function App() {
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
                 {services.map((service, index) => (
-                  <div key={service.id} className="w-full flex-shrink-0 px-4">
+                  <div
+                    key={service.id}
+                    className="w-full flex-shrink-0 px-3 md:px-4 lg:px-4"
+                  >
                     <motion.div
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileInView={{ opacity: 1, scale: 1 }}
