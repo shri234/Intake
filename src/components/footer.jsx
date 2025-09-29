@@ -98,7 +98,7 @@ const Footer = () => {
             <ul className="space-y-3 text-gray-300">
               <li>Corporate Snacks</li>
               <li>Tea & Coffee Solutions</li>
-              <li>Corporate Meals</li>
+              <li>Corporate Meal</li>
               <li>Vending Solutions</li>
               <li>Corporate Gift Kits</li>
             </ul>
@@ -112,7 +112,7 @@ const Footer = () => {
             <div className="flex space-x-4">
               {/* LinkedIn */}
               <a
-                href="#"
+                href="https://www.linkedin.com/company/intake-foods/"
                 className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-orange-500 transition-colors group"
               >
                 <svg
@@ -140,16 +140,10 @@ const Footer = () => {
 
               {/* Instagram */}
               <a
-                href="#"
+                href="https://www.instagram.com/intakefoods_inc?igsh=NHFkbTgweXJtZHBt"
                 className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-orange-500 transition-colors group"
               >
-                <svg
-                  className="w-5 h-5 text-gray-300 group-hover:text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.618 5.367 11.986 11.988 11.986s11.987-5.368 11.987-11.986C24.014 5.367 18.635.001 12.017.001zM8.449 16.988c-2.243 0-4.052-1.8-4.052-4.037s1.809-4.037 4.052-4.037S12.5 10.714 12.5 12.951s-1.808 4.037-4.051 4.037zm7.519 0c-2.243 0-4.051-1.8-4.051-4.037s1.808-4.037 4.051-4.037 4.052 1.8 4.052 4.037-1.809 4.037-4.052 4.037z" />
-                </svg>
+                <img src="/instagram.png"></img>
               </a>
             </div>
           </div>
