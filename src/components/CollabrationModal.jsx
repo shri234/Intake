@@ -36,7 +36,7 @@ const ContactUsForm = ({ onClose, onSuccess }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("http://51.21.196.140/send-email", {
+      const res = await fetch("http://51.21.196.140/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -565,7 +565,7 @@ function App() {
           reverse: true,
         },
         {
-          title: "Corporate Meals",
+          title: "Corporate Meal",
           sub: "“Nutritious, delicious, and made for the workplace.”",
           desc: `Delivered fresh and on time, our menus bring together variety and
             great taste. Every meal is crafted to keep teams fueled, focused,
