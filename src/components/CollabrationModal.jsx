@@ -36,17 +36,14 @@ const ContactUsForm = ({ onClose, onSuccess }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(
-        "https://intake-backend-production.up.railway.app/send-email",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            type: "contact",
-            formData,
-          }),
-        }
-      );
+      const res = await fetch("http://51.21.196.140/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "contact",
+          formData,
+        }),
+      });
 
       if (res.ok) {
         onSuccess("Thanks for contacting us! We will reach you shortly.");
@@ -236,17 +233,14 @@ const PartnerWithUsForm = ({ onClose, onSuccess }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch(
-        "https://intake-backend-production.up.railway.app/send-email",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            type: "partner",
-            formData,
-          }),
-        }
-      );
+      const res = await fetch("http://51.21.196.140/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "partner",
+          formData,
+        }),
+      });
 
       if (res.ok) {
         onSuccess("Thanks for partnering with us! We’ll connect soon.");
